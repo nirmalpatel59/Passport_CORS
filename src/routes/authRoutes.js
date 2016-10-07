@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var authrouter = express.Router();
 var authController = require("../controller/authController")();
+var passport = require("passport");
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -15,7 +16,16 @@ authrouter.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'X-Auth-Key');
     next();
 });
+
 authrouter.route("/")
-  .post(authController.getLoggedInuserDetails);
+.post(passport.authenticate('local'),function(req, res) {
+	if(req.user) {
+		console.log("in if");
+		return res.send("success");
+	}else {
+		console.log("in else");
+		return res.send("");
+	}
+});
 
 module.exports = authrouter;
