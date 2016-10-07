@@ -14,8 +14,8 @@ app.use(function(req, res, next) {
 var authController = function() {
 	var getLoggedInuserDetails = function(req,res) {
 		console.log("called");
-		console.log(req.query);
-		res.send("hello");
+		console.log(req.body);
+		// res.send("hello");
 		// db.view("tamsa","getUserInfo",{key:req.body.username}, function(err,data) {
 		// 	if(!err) {
 		// 		if(data.rows.length > 0) {
@@ -28,11 +28,14 @@ var authController = function() {
 		// 		console.log("err from view");
 		// 	}
 		// });
-	 //  db.get("org.couchdb.user:"+req.body.username, function(err, body) {
-	 //  	if(!err) {
-	 //  		res.send(body);
-	 //  	}
-		// });
+	  db.get("org.couchdb.user:"+req.body.username, function(err, body) {
+	  	if(!err) {
+	  		res.send(body);
+	  	}else {
+	  		res.send(null);
+	  		// res.status(200).send({status:200, message: 'Credential are invalid.', type:'internal'}); 
+	  	}
+		});
 	};
 	return {
 		getLoggedInuserDetails: getLoggedInuserDetails

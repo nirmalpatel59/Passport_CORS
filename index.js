@@ -15,11 +15,11 @@ var cloudant     = Cloudant("https://nirmalpatel59:nirmalpatel@nirmalpatel59.clo
 var db           = cloudant.db.use("yhsqizvkmp");
 var authRoutes = require("./src/routes/authRoutes");
 // var cors = require("cors");
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
