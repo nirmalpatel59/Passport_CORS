@@ -24,13 +24,13 @@ require("./src/config/passport")(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(session({secret:'cloudant'}));
+app.use(session({secret:'cloudant',cookie:{maxAge:6000}}));
 
 
-// app.get('/', function (req, res) {
-//   res.header('Content-type', 'text/html');
-//   return res.end('<h1>Hello, Secure World!</h1>');
-// });
+app.get('/',passport.authenticate('local'), function (req, res) {
+  console.log(req.user);
+  // console.log(req);
+});
 
 app.use("/login",authRoutes);
 // app.post('/login', function (req, res) {

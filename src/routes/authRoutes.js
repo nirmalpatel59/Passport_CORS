@@ -19,6 +19,7 @@ authrouter.use(function(req, res, next) {
 
 authrouter.route("/")
 .post(passport.authenticate('local'),function(req, res) {
+	console.log(req);
 	if(req.user) {
 		console.log("in if");
 		return res.send("success");
